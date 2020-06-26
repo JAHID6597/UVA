@@ -1,0 +1,44 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+int main()
+{
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    cout.tie(NULL);
+
+    //freopen("input.txt","r",stdin);
+
+    while(1)
+    {
+        long long n,i,t,nx;
+        cin>>n;
+        if(n==0)break;
+        else
+        {
+            cout<<n<<" = ";
+            if(n<0)cout<<-1<<" x ";
+            n=abs(n);
+            t=n;
+            int m=0;
+            for(i=2;i<=sqrt(n);i++){
+                while(n%i==0){
+                    m++;
+                    if(m>1)cout<<" x ";
+                    n=n/i;
+                    cout<<i;
+                }
+                if(t%i==0)nx=1;
+            }
+            if(nx==0 && m!=0 && t!=1)cout<<" x "<<t;
+            else if(nx==0 && m==0 && t!=1)cout<<t;
+
+            if(nx==1 && m!=0 && n>2)cout<<" x "<<n;
+            else if(nx==1 && m==0 && n>2)cout<<n;
+
+            nx=0;
+        }
+        cout<<endl;
+    }
+    return 0;
+}
