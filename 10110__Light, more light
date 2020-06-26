@@ -1,0 +1,28 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+//#define debug
+
+int main()
+{
+#ifdef debug
+    freopen("input.txt","r",stdin);
+#endif
+
+    long long n,p;
+    double r;
+    while(1)
+    {
+        cin>>n;
+        if(n==0)
+            break;
+        r = sqrt(n);
+        p = r;
+        if(p*p == n)
+            cout<<"yes"<<endl;
+        else
+            cout<<"no"<<endl;
+    }
+
+    return 0;
+}
