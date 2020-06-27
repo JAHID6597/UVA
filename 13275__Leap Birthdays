@@ -1,0 +1,41 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+bool isLeapYear(int year)
+{
+    if(year % 400 == 0 || year % 4 == 0 && year % 100 != 0)
+        return true;
+    else
+        return false;
+}
+
+int main()
+{
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    cout.tie(NULL);
+
+    //freopen("input.txt","r",stdin);
+
+    int t,it;
+    cin>>t;
+    for(it=1;it<=t;it++)
+    {
+        int d,m,sy,ey,cnt=0;
+        bool chk_leapYear;
+        cin>>d>>m>>sy>>ey;
+        if(d==29 && m==2){
+            sy += 4;
+            while(sy<=ey){
+                chk_leapYear = isLeapYear(sy);
+                if(chk_leapYear == true)cnt++;
+                sy += 4;
+            }
+            cout<<"Case "<<it<<": "<<cnt<<endl;
+        }
+        else{
+            cout<<"Case "<<it<<": "<<ey-sy<<endl;
+        }
+    }
+    return 0;
+}
