@@ -1,0 +1,24 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+int main()
+{
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    cout.tie(NULL);
+
+    //freopen("input.txt","r",stdin);
+
+    long long n,cnt,a,n1,n2,n3,s;
+    while(cin>>n)
+    {
+        cnt = n/2;
+        a = (cnt*cnt+n);
+        n1 = (a*2)-1;
+        n2 = n1 - 2;
+        n3 = n2 - 2;
+        s =  n1 + n2 + n3;
+        cout<<s<<endl;
+    }
+    return 0;
+}
