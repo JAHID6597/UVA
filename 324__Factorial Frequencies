@@ -1,0 +1,58 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+long long multiply(long long arr[],long long val,long long cnt)
+{
+    long long carry = 0;
+    long long prod;
+    for(long long i=0;i<cnt;i++){
+        prod = arr[i] * val + carry;
+        carry = prod/10;
+        arr[i] = prod%10;
+    }
+    while(carry){
+        arr[cnt] = carry%10;
+        carry = carry/10;
+        cnt++;
+    }
+    return cnt;
+}
+
+void fact(long long n)
+{
+    long long ans[12]={0};
+    long long cnt = 1;
+    long long arr[1000]={0};
+    arr[0] = 1;
+    for(long long i=2;i<=n;i++){
+        cnt = multiply(arr,i,cnt);
+    }
+    for(long long i=0;i<cnt;i++){
+        ans[arr[i]]++;
+    }
+    cout<<n<<"! --"<<endl;
+    for(int i=0;i<=4;i++){
+        cout<<"   "<<"("<<i<<")"<<"   "<<ans[i];
+    }cout<<endl;
+    for(int i=5;i<=9;i++){
+        cout<<"   "<<"("<<i<<")"<<"   "<<ans[i];
+    }cout<<endl;
+}
+
+int main()
+{
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    cout.tie(NULL);
+
+    //freopen("input.txt","r",stdin);
+
+    long long n;
+    while(1)
+    {
+        cin>>n;
+        if(n==0)break;
+        fact(n);
+    }
+    return 0;
+}
