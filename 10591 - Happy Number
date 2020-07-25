@@ -1,0 +1,47 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+long long squareSum(long long n)
+{
+    long long sum = 0;
+
+    while(n > 0)
+    {
+        long long rem = n%10;
+        sum += (rem*rem);
+        n /= 10;
+    }
+    return sum;
+}
+
+
+int main()
+{
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    cout.tie(NULL);
+
+    //freopen("input.txt","r",stdin);
+
+    long long t;
+    cin>>t;
+    long long Case = 0;
+    while(t--)
+    {
+        long long n,mem;
+        cin>>n;
+        vector<long long>v(1000,0);
+        mem = n;
+        long long f = n;
+
+        while(1){
+            f = squareSum(f);
+            if(v[f] == 1 || f == mem || f == 1)break;
+            v[f] = 1;
+        }
+
+        if(f == 1)cout<<"Case #"<<++Case<<": "<<n<<" is a Happy number."<<endl;
+        else cout<<"Case #"<<++Case<<": "<<n<<" is an Unhappy number."<<endl;
+    }
+    return 0;
+}
