@@ -1,0 +1,33 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+void bee(long long n)
+{
+    long long i=0,t=1,m=0,p;
+    while(i<n){
+        p = m;
+        m = t;
+        t = t + p + 1;
+        i++;
+    }
+    cout<<m<<" "<<t<<endl;
+}
+
+
+int main()
+{
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    cout.tie(NULL);
+
+    //freopen("input.txt","r",stdin);
+
+    while(1)
+    {
+        long long n;
+        cin>>n;
+        if(n == -1)break;
+        bee(n);
+    }
+    return 0;
+}
