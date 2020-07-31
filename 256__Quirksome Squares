@@ -1,0 +1,64 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+vector<long long> v;
+void generate_square()
+{
+    for(long long i=0,x;i<=10000;i++){
+        x = i*i;
+        v.push_back(x);
+    }
+}
+
+int main()
+{
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    cout.tie(NULL);
+
+    //freopen("input.txt","r",stdin);
+
+    long long n;
+    generate_square();
+    while(cin>>n)
+    {
+        long long a,b;
+        if(n == 2){
+            string s0="00",s1="01";
+            cout<<s0<<endl<<s1<<endl;
+            for(long long i=2;i<pow(10,n) && v[i]<pow(10,n);i++){
+                a = v[i]/10;
+                b = v[i]%10;
+                if(pow((a+b),2) == v[i])cout<<setw(2)<<setfill('0')<<v[i]<<endl;
+            }
+        }
+        else if(n == 4){
+            string s0="0000",s1="0001";
+            cout<<s0<<endl<<s1<<endl;
+            for(long long i=2;i<pow(10,n) && v[i]<pow(10,n);i++){
+                a = v[i]/100;
+                b = v[i]%100;
+                if(pow((a+b),2) == v[i])cout<<setw(4)<<setfill('0')<<v[i]<<endl;
+            }
+        }
+        else if(n == 6){
+            string s0="000000",s1="000001";
+            cout<<s0<<endl<<s1<<endl;
+            for(long long i=2;i<pow(10,n) && v[i]<pow(10,n);i++){
+                a = v[i]/1000;
+                b = v[i]%1000;
+                if(pow((a+b),2) == v[i] && v[i]<pow(10,n)-1)cout<<setw(6)<<setfill('0')<<v[i]<<endl;
+            }
+        }
+        else if(n == 8){
+            string s0="00000000",s1="00000001";
+            cout<<s0<<endl<<s1<<endl;
+            for(long long i=2;i<pow(10,n) && v[i]<pow(10,n);i++){
+                a = v[i]/10000;
+                b = v[i]%10000;
+                if(pow((a+b),2) == v[i])cout<<setw(8)<<setfill('0')<<v[i]<<endl;
+            }
+        }
+    }
+    return 0;
+}
