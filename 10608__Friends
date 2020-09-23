@@ -1,0 +1,53 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+vector<int> a[30005];
+int vis[30005]={0};
+int node,edge,c=0;
+
+int dfs(int s)
+{
+    c++;
+    ///cout<<s<<" ";
+    vis[s] = 1;
+    for(int i=0;i<a[s].size();i++){
+        if(vis[a[s][i]] == 0)dfs(a[s][i]);
+    }
+    return c;
+}
+
+int main()
+{
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    cout.tie(NULL);
+
+    ///freopen("input.txt","r",stdin);
+
+    int t;
+    cin>>t;
+    while(t--){
+        cin>>node>>edge;
+        int s = INT_MIN;
+        for(int i=0;i<edge;i++){
+            int u,v;
+            cin>>u>>v;
+            a[u].push_back(v);
+            a[v].push_back(u);
+
+        }
+
+        for(int i=1;i<=node;i++){
+            if(vis[i] == 0){
+                c = 0;
+                dfs(i);
+                s = max(s,c);
+            }
+        }
+        cout<<s<<endl;
+        c=0;
+        memset(a,0,sizeof(a));
+        memset(vis,0,sizeof(vis));
+    }
+    return 0;
+}
