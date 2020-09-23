@@ -1,0 +1,55 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+char a[10005][10005];
+int c=0;
+int node,edge;
+
+void dfs(int u,int v)
+{
+    if(u < 0  || v < 0)return;
+    if(u == node || v == edge)return;
+    if(a[u][v] == '*')return;
+
+    if(a[u][v] == '@')a[u][v] = '*';
+
+    dfs(u,v+1);
+    dfs(u,v-1);
+    dfs(u+1,v);
+    dfs(u-1,v);
+    dfs(u+1,v+1);
+    dfs(u+1,v-1);
+    dfs(u-1,v+1);
+    dfs(u-1,v-1);
+}
+
+int main()
+{
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    cout.tie(NULL);
+
+    ///freopen("input.txt","r",stdin);
+
+    while(1){
+        cin>>node>>edge;
+        if(node == 0)break;
+
+        for(int i=0;i<node;i++){
+            for(int j=0;j<edge;j++){
+                cin>>a[i][j];
+            }
+        }
+        for(int i=0;i<node;i++){
+            for(int j=0;j<edge;j++){
+                if(a[i][j] == '@'){
+                    dfs(i,j);
+                    c++;
+                }
+            }
+        }
+        cout<<c<<endl;
+        c = 0;
+    }
+    return 0;
+}
