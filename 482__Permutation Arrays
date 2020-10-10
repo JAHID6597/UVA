@@ -1,0 +1,70 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+int main()
+{
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    cout.tie(NULL);
+
+    long long t;
+    cin>>t;
+    cin.get();
+    while(t--){
+        cin.get();
+        
+        string s1,s2;
+        getline(cin,s1);
+        getline(cin,s2);
+        
+        vector<long long> v1;
+        vector<string> v2;
+        vector< pair<long long,string> > vp;
+        string temp="";
+        
+        for(long long i=0;i<s1.size();i++){
+            if(s1[i] != ' ')
+                temp += s1[i];
+            else{
+                stringstream ss(temp);
+                long long x;
+                ss>>x;
+                x = x - 1;
+                v1.push_back(x);
+                temp = "";
+            }
+        }
+        if(temp.size() >= 1){
+            stringstream ss(temp);
+            long long x;
+            ss>>x;
+            x = x - 1;
+            v1.push_back(x);
+            temp = "";
+        }
+        for(long long i=0;i<s2.size();i++){
+            if(s2[i] != ' ')
+                temp += s2[i];
+            else{
+                v2.push_back(temp);
+                temp = "";
+            }
+        }
+        if(temp.size() >= 1){
+            v2.push_back(temp);
+            temp = "";
+        }
+
+        for(int i=0;i<v1.size();i++){
+            vp.push_back({v1[i],v2[i]});
+        }
+        
+        sort(vp.begin(),vp.end());
+        
+        for(int i=0;i<v1.size();i++){
+            cout<<vp[i].second<<endl;
+        }
+        if(t!=0)cout<<endl;
+    }
+    return 0;
+}
