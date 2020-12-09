@@ -1,0 +1,50 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+void multiply(string a, string b)
+{
+    vector<long long> res(a.size()+b.size(),0);
+    long long carry , m , p=0,q=0,x,y;
+    for(long long i=0;i<a.size();i++){
+        q = 0;carry=0;
+        for(long long j=0;j<b.size();j++){
+            x = (a[i]-'0');
+            y = (b[j]-'0');
+            m = (x * y) + res[p+q] + carry;
+            res[p+q] = (m%10);
+            carry = (m/10);
+            q++;
+        }
+        if(carry > 0)
+            res[p+q] += carry;
+        p++;
+    }
+    ///reverse(res.begin(), res.end());
+    long long i=res.size()-1;
+    for(;i>=0;i--){
+        if(res[i]!=0)break;
+    }
+    for(;i>=0;i--){
+        cout<<res[i];
+        if(i==0){i=-2;break;}
+    }
+    if(i==-1)cout<<0;
+    cout<<endl;
+}
+
+int main()
+{
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    cout.tie(NULL);
+
+    ///freopen("input.txt","r",stdin);
+
+    string a,b;
+    while(cin>>a>>b){
+        reverse(a.begin(), a.end());
+        reverse(b.begin(), b.end());
+        multiply(a,b);
+    }
+    return 0;
+}
