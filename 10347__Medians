@@ -1,0 +1,22 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+#define x 4.0/3.0
+
+int main()
+{
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    cout.tie(NULL);
+
+    ///freopen("input.txt","r",stdin);
+
+    double a,b,c,A,S;
+    while(cin>>a>>b>>c){
+        S = (a+b+c)/2;
+        A = x * sqrt(S*(S-a)*(S-b)*(S-c));
+        if(A>0)cout<<fixed<<setprecision(3)<<A<<endl;
+        else cout<<fixed<<setprecision(3)<<-1.000<<endl;
+    }
+    return 0;
+}
