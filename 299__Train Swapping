@@ -1,0 +1,40 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+int c = 0;
+
+int fun(vector<int> v)
+{
+    for(int i=0;i<v.size();i++){
+        for(int j=i+1;j<v.size();j++){
+            if(v[i] > v[j]){
+                c++;
+                swap(v[i], v[j]);
+            }
+        }
+    }
+    return c;
+}
+
+int main()
+{
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    cout.tie(NULL);
+
+    // freopen("input.txt", "r", stdin);
+    // freopen("output.txt", "w", stdout);
+
+    int t;
+    cin >> t;
+    while (t--){
+        int n;
+        cin >> n;
+        vector<int> v(n);
+        for (auto &i : v)
+            cin >> i;
+        cout<<"Optimal train swapping takes "<<fun(v)<<" swaps."<<endl;
+        c = 0;
+    }
+    return 0;
+}
