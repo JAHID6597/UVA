@@ -1,0 +1,44 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+int main()
+{
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    cout.tie(NULL);
+
+    // freopen("input.txt", "r", stdin);
+    // freopen("output.txt", "w", stdout);
+
+    int t, Case = 1;
+    cin >> t;
+    while (t--)
+    {
+        cout << "Case " << Case << endl;
+        Case++;
+
+        string str;
+        cin >> str;
+
+        map<char, int> m;
+        map<char, int>::iterator it;
+
+        stack<char> s;
+        s.push(str[0]);
+
+        for (int i = 1; i < str.size(); i++){
+            char x = s.top();
+            if (x == str[i])
+                s.pop();
+            else
+                s.push(str[i]),
+                m[x]++,
+                m[str[i]]++;
+        }
+
+        for (it = m.begin(); it != m.end(); it++){
+            cout << it->first << " = " << it->second << endl;
+        }
+    }
+    return 0;
+}
