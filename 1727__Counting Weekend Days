@@ -1,0 +1,80 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+map<string, int> md;
+map<string, int> dd;
+
+void month()
+{
+    md["JAN"] = 31;
+    md["FEB"] = 28;
+    md["MAR"] = 31;
+    md["APR"] = 30;
+    md["MAY"] = 31;
+    md["JUN"] = 30;
+    md["JUL"] = 31;
+    md["AUG"] = 31;
+    md["SEP"] = 30;
+    md["OCT"] = 31;
+    md["NOV"] = 30;
+    md["DEC"] = 31;
+}
+
+void day()
+{
+    dd["SUN"] = 0;
+    dd["MON"] = 1;
+    dd["TUE"] = 2;
+    dd["WED"] = 3;
+    dd["THU"] = 4;
+    dd["FRI"] = 5;
+    dd["SAT"] = 6;
+}
+
+int main()
+{
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    cout.tie(NULL);
+
+    // freopen("input.txt", "r", stdin);
+    // freopen("output.txt", "w", stdout);
+
+    month();
+    day();
+
+    int t;
+    cin >> t;
+    while (t--)
+    {
+        int cnt;
+        string m, d;
+        cin >> m >> d;
+        int a, b;
+        a = md[m];
+        b = dd[d];
+
+        if (a == 28)
+            cnt = 8;
+        else if (a == 31){
+            if(b == 6 || b == 3)
+                cnt = 9;
+            else if (b == 5 || b == 4)
+                cnt = 10;
+            else
+                cnt = 8;
+        }
+        else if (a == 30){
+            if (b == 6 || b == 4)
+                cnt = 9;
+            else if (b == 5)
+                cnt = 10;
+            else
+                cnt = 8;
+        }
+        else
+            cnt = 8;
+        cout << cnt << endl;
+    }
+    return 0;
+}
