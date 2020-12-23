@@ -1,0 +1,60 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+int carryCount(string &a, string &b)
+{
+    int numberOfCarry=0, carry=0, s, x, y;
+    int len1 = a.size(), len2 = b.size(), p, q;
+    int mx = max(len1, len2);
+    
+    for(p=0, q=0;p<len1 && q<len2;p++,q++){
+        x = a[p]-'0';
+        y = b[q]-'0';
+        s = x + y + carry;
+        carry = s / 10;
+        if(carry > 0)numberOfCarry++;
+    }
+    
+    if(p<len1){
+        while(p<len1){
+            x = a[p]-'0';
+            s = x + carry;
+            carry = s / 10;
+            if(carry > 0)numberOfCarry++;
+            p++;
+        }
+    }
+    else if(q<len2){
+        while(q<len2){
+            y = b[q]-'0';
+            s = y + carry;
+            carry = s / 10;
+            if(carry > 0)numberOfCarry++;
+            q++;
+        }
+    }
+    return numberOfCarry;
+}
+
+int main()
+{
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    cout.tie(NULL);
+
+    while(1){
+        string a,b;
+        cin>>a>>b;
+        reverse(a.begin(),a.end());
+        reverse(b.begin(),b.end());
+
+        if(a == "0" && b == "0")break;
+
+        int numberOfCarry = carryCount(a,b);
+
+        if(numberOfCarry == 1)cout<<"1 carry operation."<<endl;
+        else if(numberOfCarry == 0)cout<<"No carry operation."<<endl;
+        else cout<<numberOfCarry<<" carry operations."<<endl;
+    }
+    return 0;
+}
