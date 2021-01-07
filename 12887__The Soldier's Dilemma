@@ -1,0 +1,38 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+typedef long long ll;
+#define mod 1000000007
+
+ll ct[5005];
+
+void cat()
+{
+    ct[0] = 1;
+    ct[1] = 1;
+    ct[2] = 2;
+    for(ll i=3;i<=5001;i++){
+        for(ll j=0;j<i;j++){
+            ct[i] += ((ct[j] * ct[i-j-1])%mod);
+            ct[i] %= mod;
+        }
+    }
+}
+
+int main()
+{
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    cout.tie(NULL);
+
+    cat();
+
+    int t;
+    cin>>t;
+    while(t--){
+        ll n;
+        cin>>n;
+        cout<<ct[n]<<endl;
+    }
+    return 0;
+}
