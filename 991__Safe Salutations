@@ -1,0 +1,26 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+int main()
+{
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    cout.tie(NULL);
+
+    int n,c=0;
+    while(cin>>n){
+        int ct[n+5]={0};
+        ct[0] = 1;
+        ct[1] = 1;
+        ct[2] = 2;
+        for(int i=3;i<=n;i++){
+            for(int j=0;j<i;j++){
+                ct[i] += ct[j] * ct[i-j-1];
+            }
+        }
+        if(c > 0)cout<<endl;
+        cout<<ct[n]<<endl;
+        c++;
+    }
+    return 0;
+}
