@@ -1,0 +1,49 @@
+#include <bits/stdc++.h>
+using namespace std;
+typedef long long ll;
+
+string add(string a, string b)
+{
+    ll carry = 0, i=0, x;
+    if(a.size() < b.size())swap(a,b);
+    reverse(a.begin(),a.end());
+    reverse(b.begin(),b.end());
+    string s="";
+    while(i < b.size()){
+        x = (a[i]-'0')+(b[i]-'0')+carry;
+        s += (x%10)+'0';
+        carry = x/10;
+        i++;
+    }
+    while(i < a.size()){
+        x = (a[i]-'0')+carry;
+        s += (x%10)+'0';
+        carry = x/10;
+        i++;
+    }
+    while(carry != 0){
+        s += (carry%10)+'0';
+        carry = carry/10;
+    }
+    reverse(s.begin(),s.end());
+    return s;
+}
+
+int main()
+{
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    cout.tie(NULL);
+
+    vector<string> m(5000,"0");
+    m[0]="0";
+    m[1]="1";
+    for(ll i=2;i<=5000;i++){
+        m[i]=add(m[i-1],m[i-2]);
+    }
+    ll x;
+    while(cin>>x){
+        cout<<"The Fibonacci number for "<<x<<" is "<<m[x]<<endl;
+    }
+    return 0;
+}
