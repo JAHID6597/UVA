@@ -1,0 +1,31 @@
+#include <bits/stdc++.h>
+using namespace std;
+typedef unsigned long long ull;
+
+int main()
+{
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    cout.tie(NULL);
+
+    ull n;
+    while(cin>>n && n!=-1){
+        ull t;
+        vector<ull> v;
+        t=n;
+        for(ull i=2;i*i<=t;i++){
+            while(n%i==0 && n>1){
+                v.push_back(i);
+                n/=i;
+            }
+            if(n<2)break;
+        }
+        if(n>1)v.push_back(n);
+        sort(v.begin(),v.end());
+        for(ull i=0;i<v.size();i++){
+            cout<<"    "<<v[i]<<endl;
+        }
+        cout<<endl;
+    }
+    return 0;
+}
