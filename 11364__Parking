@@ -1,0 +1,25 @@
+#include <bits/stdc++.h>
+using namespace std;
+typedef long long ll;
+
+int main()
+{
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    cout.tie(NULL);
+
+    ll t;
+    cin>>t;
+    while(t--){
+        ll n;
+        cin>>n;
+        vector<ll> v(n);
+        for(auto &i : v)cin>>i;
+        sort(v.begin(), v.end());
+        ll mx = v[n-1];
+        ll mn = v[0];
+        ll res = (mx-mn)*2;
+        cout<<res<<endl;
+    }
+    return 0;
+}
