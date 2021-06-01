@@ -1,0 +1,55 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+int a[1000000];
+int dp[1000000];
+
+int digitSum(int n){
+    int s = 0;
+    while(n > 0){
+        s += (n % 10);
+        n /= 10;
+    }
+    return s;
+}
+
+void allPrime(){
+    a[2]=1;
+    dp[2]=1;
+    for(int i=3;i<=1000000;i+=2){
+        int f=0;
+        for(int j=3;j*j<=i;j+=2){
+            if(i%j==0){f=1;break;}
+        }
+        dp[i]=dp[i-1];
+        if(f==0){
+            a[i] = 1;
+            int ds = digitSum(i);
+            if(a[ds])
+                dp[i]++;
+        }
+        dp[i+1]=dp[i];
+    }
+}
+
+int main()
+{
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    cout.tie(NULL);
+
+    allPrime();
+
+    int t;
+    scanf("%d", &t);
+    while(t--){
+        int t1, t2;
+        scanf("%d%d", &t1, &t2);
+
+        int dPrime = dp[t2] - dp[t1-1];
+
+        printf("%d\n", dPrime);
+    }
+
+    return 0;
+}
