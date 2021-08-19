@@ -1,0 +1,34 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+double f(int p, int q, int r, int s, int t, int u, double x){
+    return p * exp(-x) + q * sin(x) + r * cos(x) + s * tan(x) + t * x * x + u;
+}
+
+int main()
+{
+    long long p, q, r, s, t, u;
+    while (scanf("%lld %lld %lld %lld %lld %lld",&p,&q,&r,&s,&t,&u)==6){
+        double fa = f(p, q, r, s, t, u, 0);
+        double fb = f(p, q, r, s, t, u, 1);
+        if(fa*fb > 0)
+            cout<<"No solution"<<endl;
+        else{
+            double d, a=0, b=1;
+
+            int i=0;
+            while(i<50){
+                d = (a+b)/2.0;
+                double fd = f(p, q, r, s, t, u, d);
+                if(fd > 0)a=d;
+                else b=d;
+                i++;
+            }
+
+            printf("%.4lf\n", d);
+        }
+    }
+
+    return 0;
+}
+
