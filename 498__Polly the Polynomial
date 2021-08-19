@@ -1,0 +1,51 @@
+#include<bits/stdc++.h>
+using namespace std;
+typedef long long ll;
+
+vector<ll> lineToInt(string line){
+    vector<ll> v;
+    string temp = "";
+    bool isMinus = false;
+    for(ll i=0;i<line.size();i++){
+        if(line[i] == ' '){
+            if(temp.size() == 0)
+                continue;
+
+            ll x = stoi(temp) * (isMinus ? -1 : 1);
+            v.push_back(x);
+            temp = "";
+            isMinus = false;
+        }
+        else if(line[i] == '-')isMinus=true;
+        else temp += line[i];
+    }
+    if(temp.size() > 0){
+        ll x = stoi(temp) * (isMinus ? -1 : 1);
+        v.push_back(x);
+    }
+    return v;
+}
+
+int main()
+{
+    string line1, line2;
+    while(getline(cin, line1)){
+        getline(cin, line2);
+
+        vector<ll> c, x;
+        c = lineToInt(line1);
+        x = lineToInt(line2);
+
+        for(ll i=0;i<x.size();i++){
+            ll s = 0;
+            for(ll j=0, k=c.size()-1;j<c.size();j++, k--){
+                s += pow(x[i], j) * c[k];
+            }
+            cout<<s;
+            if(i != x.size()-1)cout<<" ";
+        }cout<<endl;
+
+    }
+    return 0;
+}
+
