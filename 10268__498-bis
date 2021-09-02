@@ -1,0 +1,51 @@
+#include<bits/stdc++.h>
+using namespace std;
+typedef long long ll;
+
+vector<ll> lineToInt(string line){
+    vector<ll> v;
+    string temp = "";
+    bool isMinus = false;
+    for(ll i=0;i<line.size();i++){
+        if(line[i] == ' '){
+            if(temp.size() == 0)
+                continue;
+
+            ll x = stoi(temp) * (isMinus ? -1 : 1);
+            v.push_back(x);
+            temp = "";
+            isMinus = false;
+        }
+        else if(line[i] == '-')isMinus=true;
+        else temp += line[i];
+    }
+    if(temp.size() > 0){
+        ll x = stoi(temp) * (isMinus ? -1 : 1);
+        v.push_back(x);
+    }
+    return v;
+}
+
+int main()
+{
+    ///freopen ("output.txt","w",stdout);
+
+    string line2;
+    ll x;
+    while(cin>>x){
+        getline(cin, line2);
+        getline(cin, line2);
+
+        vector<ll> a;
+        a = lineToInt(line2);
+
+        ll n = a.size()-1;
+        ll s = a[0]*n;
+
+        for(ll j=1;j<n;j++){
+            s = s * x + a[j] * (n-j);
+        }
+        cout<<s<<endl;
+    }
+    return 0;
+}
