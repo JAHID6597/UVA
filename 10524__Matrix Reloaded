@@ -1,0 +1,110 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+vector<double> multiplyRow(vector<double> row, double multi){
+    for (int i = 0; i < row.size(); i++)
+        row[i] *= multi;
+
+    return row;
+}
+
+vector<double> addRow(vector<double> row1, vector<double> row2){
+    vector<double> newRow;
+    for (int i = 0; i < row1.size(); i++)
+        newRow.push_back(row1[i] + row2[i]);
+
+    return newRow;
+}
+
+vector<double> normalize(vector<double> v, double divide){
+    for (int i = 0; i < v.size(); i++)
+        v[i] = v[i] / divide;
+    return v;
+}
+
+vector<vector<double>> generateIdentityMatrix(int n){
+    vector<vector<double>> I;
+    for (int i = 0; i < n; i++){
+        vector<double> v;
+        for (int j = 0; j < n; j++){
+            v.push_back(i == j ? 1 : 0);
+        }
+        I.push_back(v);
+    }
+    return I;
+}
+
+void vvp(vector<vector<double>> v){
+    for (int i = 0; i < v.size(); i++){
+        for (int j = 0; j < v[i].size(); j++){
+            cout <<fixed<<setprecision(6)<< v[i][j];
+            if(j < v[i].size()-1) cout<< " ";
+        }
+        cout << endl;
+    }
+}
+
+int main()
+{
+    bool nl=false;
+    while (1){
+        if(nl)cout<<endl;
+        int n;
+        cin >> n;
+        if(n == 0)
+            break;
+
+        bool ok = true;
+        vector<vector<double>> A, I = generateIdentityMatrix(n);
+        for (int i = 0; i < n; i++){
+            vector<double> v;
+            for (int j = 0; j < n; j++){
+                double x;
+                cin >> x;
+                v.push_back(x);
+            }
+            A.push_back(v);
+        }
+
+        for (int i = 0; i < A.size(); i++){
+           if(abs(A[i][i]) < 1e-7){ok=false;}
+            vector<vector<double>> tempA, tempI;
+            for (int j = i + 1; j < A.size(); j++){
+                double multi = -1.0 * (A[j][i] / A[i][i]);
+                vector<double> multipliedRow = multiplyRow(A[i], multi);
+                vector<double> addedRow = addRow(A[j], multipliedRow);
+                tempA.push_back(addedRow);
+                multipliedRow = multiplyRow(I[i], multi);
+                addedRow = addRow(I[j], multipliedRow);
+                tempI.push_back(addedRow);
+            }
+            for (int j = i + 1, p = 0; p < tempA.size(); j++)
+                A[j] = tempA[p], I[j] = tempI[p++];
+
+            tempA.clear();
+            tempI.clear();
+
+            for (int j = i - 1; j >= 0; j--){
+                double multi = -1.0 * (A[j][i] / A[i][i]);
+                vector<double> multipliedRow = multiplyRow(A[i], multi);
+                vector<double> addedRow = addRow(A[j], multipliedRow);
+                tempA.push_back(addedRow);
+                multipliedRow = multiplyRow(I[i], multi);
+                addedRow = addRow(I[j], multipliedRow);
+                tempI.push_back(addedRow);
+            }
+            for (int j = i - 1, p = 0; p < tempA.size(); j--)
+                A[j] = tempA[p], I[j] = tempI[p++];
+
+            double dv = A[i][i];
+            A[i] = normalize(A[i], dv);
+            I[i] = normalize(I[i], dv);
+        }
+
+        if(!ok)cout<<"Not possible"<<endl;
+        else vvp(I);
+
+        nl=true;
+    }
+    return 0;
+}
